@@ -7,6 +7,7 @@
     android:background="@color/white"
     android:gravity="center_horizontal"
     android:orientation="vertical">
+
     <com.hjq.bar.TitleBar
         android:id="@+id/tb_login_bar"
         android:layout_width="match_parent"
@@ -22,6 +23,13 @@
         android:layout_height="@dimen/space_200"
         android:layout_margin="@dimen/space_60"
         android:src="@mipmap/ic_logo" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="WanAndroid"
+        android:textColor="@color/colorAccent" />
 
     <com.crazy.gy.view.ClearEditText
         android:id="@+id/et_login_phone"
