@@ -18,8 +18,6 @@ public class App extends Application {
 
     //服务器地址
     public static String path = "http://www.wanandroid.com/";
-    //imooc的api
-    public static String imoocPath = "http://www.imooc.com/";
 
 
 

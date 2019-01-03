@@ -66,6 +66,7 @@ public interface ApiServer {
     /**
      * 知识体系内容
      * http://www.wanandroid.com/article/list/0/json?cid=60
+     *
      * @param page
      * @param cid
      * @return
@@ -160,8 +161,7 @@ public interface ApiServer {
      * 取消收藏
      *
      * @param id
-     * @param originId
-     * http://www.wanandroid.com/lg/uncollect_originId/2333/json
+     * @param originId http://www.wanandroid.com/lg/uncollect_originId/2333/json
      * @return
      */
     @POST("/lg/uncollect_originId/{id}/json")
@@ -169,51 +169,19 @@ public interface ApiServer {
 
     /**
      * 我的收藏
+     *
      * @param page
      * @return
      */
     @GET("/lg/collect/list/{page}/json")
     Flowable<BaseHttpBean<ArticleBean>> getMyCollectList(@Path("page") int page);
 
-
-
-
-
-
     /**
-     *  导航数据
-     * @return
-     */
-//    @GET("navi/json")
-//    Flowable<BaseHttpBean> getNaviList();
-
-
-    // 搜索热词
-//    @GET("hotkey/json")
-//    Flowable<BaseHttpBean<List<HotKey>>> getHotKey();
-
-
-    //http://www.wanandroid.com/lg/todo/listdone/0/json/1
-//http://www.wanandroid.com/lg/todo/listdone/类型/json/页码
-//    @POST("/lg/todo/listdone/0/json/{page}")
-//    Flowable<BaseHttpBean<TodoListBean>> getListDoneList(@Path("page") int page);
-
-
-
-
-    /**
-     * 仅更新完成状态Todo
+     * 退出登录
      *
-     * @param id
-     * @param status
      * @return
      */
-//    @POST("/lg/todo/done/{id}/json")
-//    Flowable<BaseHttpBean<TodoDesBean>> donetodo(@Path("id") int id, @Query("status") int status);
-
-    //http://www.wanandroid.com/lg/todo/delete/83/json
-
-
-
+    @GET("/user/logout/json")
+    Flowable<BaseHttpBean> logout();
 
 }

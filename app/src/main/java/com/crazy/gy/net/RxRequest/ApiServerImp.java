@@ -364,200 +364,24 @@ public class ApiServerImp {
             }
         });
     }
+
     /**
-     * 导航数据
-     *
+     * 退出登录
      * @param result
      */
-//    public void NaviList(final OnResultClick<BaseHttpBean> result) {
-//        ApiServer mLoginServer = RxRetrofit.getInstance().create(ApiServer.class);
-//        RxHttp.sendRequest(mLoginServer.getNaviList(), new Consumer<BaseHttpBean>() {
-//            @Override
-//            public void accept(BaseHttpBean baseHttpBean) throws Exception {
-//                result.success(baseHttpBean);
-//            }
-//        }, new Consumer<Throwable>() {
-//            @Override
-//            public void accept(Throwable throwable) throws Exception {
-//                //网络请求失败
-//                result.fail(throwable);
-//            }
-//        });
-//    }
-
-    /**
-     * 取消收藏
-     *
-     * @param id
-     * @param originId
-     * @param result
-     */
-//    public void RemoveCollectArticle(int id, int originId, final OnResultClick<BaseHttpBean> result) {
-//        ApiServer mLoginServer = RxRetrofit.getInstance().create(ApiServer.class);
-//        RxHttp.sendRequest(mLoginServer.getRemoveCollectArticle(id, originId), new Consumer<BaseHttpBean>() {
-//            @Override
-//            public void accept(BaseHttpBean baseHttpBean) throws Exception {
-//                result.success(baseHttpBean);
-//            }
-//        }, new Consumer<Throwable>() {
-//            @Override
-//            public void accept(Throwable throwable) throws Exception {
-//                //网络请求失败
-//                result.fail(throwable);
-//            }
-//        });
-//    }
-
-    /**
-     * 收藏文章
-     *
-     * @param id
-     * @param result
-     */
-//    public void AddCollectArticle(int id, final OnResultClick<BaseHttpBean> result) {
-//        ApiServer mLoginServer = RxRetrofit.getInstance().create(ApiServer.class);
-//        RxHttp.sendRequest(mLoginServer.getAddCollectArticle(id), new Consumer<BaseHttpBean>() {
-//            @Override
-//            public void accept(BaseHttpBean baseHttpBean) throws Exception {
-//                result.success(baseHttpBean);
-//            }
-//        }, new Consumer<Throwable>() {
-//            @Override
-//            public void accept(Throwable throwable) throws Exception {
-//                //网络请求失败
-//                result.fail(throwable);
-//            }
-//        });
-//    }
-
-    /**
-     * 未完成 Todo 列表
-     */
-//    public void GetListNotDoList(int page, final OnResultClick<BaseHttpBean> result) {
-//        ApiServer mLoginServer = RxRetrofit.getInstance().create(ApiServer.class);
-//        RxHttp.sendRequest(mLoginServer.getListNotDoList(page), new Consumer<BaseHttpBean<TodoListBean>>() {
-//            @Override
-//            public void accept(BaseHttpBean baseHttpBean) throws Exception {
-//                result.success(baseHttpBean);
-//            }
-//        }, new Consumer<Throwable>() {
-//            @Override
-//            public void accept(Throwable throwable) throws Exception {
-//                //网络请求失败
-//                result.fail(throwable);
-//            }
-//        });
-//    }
-
-    /**
-     * 已完成 Done 列表
-     */
-//    public void GetListDoneList(int page, final OnResultClick<BaseHttpBean> result) {
-//        ApiServer mLoginServer = RxRetrofit.getInstance().create(ApiServer.class);
-//        RxHttp.sendRequest(mLoginServer.getListDoneList(page), new Consumer<BaseHttpBean<TodoListBean>>() {
-//            @Override
-//            public void accept(BaseHttpBean baseHttpBean) throws Exception {
-//                result.success(baseHttpBean);
-//            }
-//        }, new Consumer<Throwable>() {
-//            @Override
-//            public void accept(Throwable throwable) throws Exception {
-//                //网络请求失败
-//                result.fail(throwable);
-//            }
-//        });
-//    }
-
-    /**
-     * 封装待完成、已完成列表
-     *
-     * @param isDone
-     * @param page
-     * @param result
-     */
-//    public void GetList(boolean isDone, int page, final OnResultClick<BaseHttpBean> result) {
-//        ApiServer mLoginServer = RxRetrofit.getInstance().create(ApiServer.class);
-//        RxHttp.sendRequest(isDone ? mLoginServer.getListDoneList(page) : mLoginServer.getListNotDoList(page), new Consumer<BaseHttpBean<TodoListBean>>() {
-//            @Override
-//            public void accept(BaseHttpBean baseHttpBean) throws Exception {
-//                result.success(baseHttpBean);
-//            }
-//        }, new Consumer<Throwable>() {
-//            @Override
-//            public void accept(Throwable throwable) throws Exception {
-//                //网络请求失败
-//                result.fail(throwable);
-//            }
-//        });
-//    }
-
-    /**
-     * 新增一条Todo
-     *
-     * @param title
-     * @param content
-     * @param date
-     * @param result
-     */
-//    public void AddTodo(String title, String content, String date, String type, final OnResultClick<BaseHttpBean> result) {
-//        ApiServer mLoginServer = RxRetrofit.getInstance().create(ApiServer.class);
-//        RxHttp.sendRequest(mLoginServer.addtodo(title, content, date, type), new Consumer<BaseHttpBean>() {
-//            @Override
-//            public void accept(BaseHttpBean baseHttpBean) throws Exception {
-//                result.success(baseHttpBean);
-//            }
-//        }, new Consumer<Throwable>() {
-//            @Override
-//            public void accept(Throwable throwable) throws Exception {
-//                //网络请求失败
-//                result.fail(throwable);
-//            }
-//        });
-//    }
-
-    /**
-     * 仅更新完成状态Todo
-     *
-     * @param id
-     * @param status
-     * @param result
-     */
-//    public void DoneTodo(int id, int status, final OnResultClick<BaseHttpBean> result) {
-//        ApiServer mLoginServer = RxRetrofit.getInstance().create(ApiServer.class);
-//        RxHttp.sendRequest(mLoginServer.donetodo(id, status), new Consumer<BaseHttpBean<TodoDesBean>>() {
-//            @Override
-//            public void accept(BaseHttpBean baseHttpBean) throws Exception {
-//                result.success(baseHttpBean);
-//            }
-//        }, new Consumer<Throwable>() {
-//            @Override
-//            public void accept(Throwable throwable) throws Exception {
-//                //网络请求失败
-//                result.fail(throwable);
-//            }
-//        });
-//    }
-
-    /**
-     * 删除
-     *
-     * @param id
-     */
-//    public void DeleteTodo(int id, final OnResultClick<BaseHttpBean> result) {
-//        ApiServer mLoginServer = RxRetrofit.getInstance().create(ApiServer.class);
-//        RxHttp.sendRequest(mLoginServer.deletetodo(id), new Consumer<BaseHttpBean>() {
-//            @Override
-//            public void accept(BaseHttpBean baseHttpBean) throws Exception {
-//                result.success(baseHttpBean);
-//            }
-//        }, new Consumer<Throwable>() {
-//            @Override
-//            public void accept(Throwable throwable) throws Exception {
-//                //网络请求失败
-//                result.fail(throwable);
-//            }
-//        });
-//    }
-
-
+    public void Logout(final OnResultClick<BaseHttpBean> result) {
+        ApiServer mLoginServer = RxRetrofit.getInstance().create(ApiServer.class);
+        RxHttp.sendRequest(mLoginServer.logout(), new Consumer<BaseHttpBean>() {
+            @Override
+            public void accept(BaseHttpBean baseHttpBean) throws Exception {
+                result.success(baseHttpBean);
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                //网络请求失败
+                result.fail(throwable);
+            }
+        });
+    }
 }
