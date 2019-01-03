@@ -3,6 +3,7 @@ package com.crazy.gy.net.RxRequest;
 import com.crazy.gy.entity.BannerListBean;
 import com.crazy.gy.entity.HomeListBean;
 import com.crazy.gy.entity.KnowledgeListBean;
+import com.crazy.gy.entity.ArticleBean;
 import com.crazy.gy.entity.ProjectContentListBean;
 import com.crazy.gy.entity.ProjectListBean;
 import com.crazy.gy.entity.TodoDesBean;
@@ -135,6 +136,30 @@ public class ApiServerImp {
             }
         });
     }
+
+    /**
+     * 知识体系内容
+     *
+     * @param page
+     * @param cid
+     * @param result
+     */
+    public void KnowLedgeContentListImp(int page, int cid, final OnResultClick<BaseHttpBean> result) {
+        ApiServer mLoginServer = RxRetrofit.getInstance().create(ApiServer.class);
+        RxHttp.sendRequest(mLoginServer.getKnowLedgeContentList(page, cid), new Consumer<BaseHttpBean<ArticleBean>>() {
+            @Override
+            public void accept(BaseHttpBean baseHttpBean) throws Exception {
+                result.success(baseHttpBean);
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                //网络请求失败
+                result.fail(throwable);
+            }
+        });
+    }
+
 
     /***
      * 项目
@@ -272,6 +297,73 @@ public class ApiServerImp {
         });
     }
 
+
+    /**
+     * 收藏文章
+     *
+     * @param id
+     * @param result
+     */
+    public void CollectArticle(int id, final OnResultClick<BaseHttpBean> result) {
+        ApiServer mLoginServer = RxRetrofit.getInstance().create(ApiServer.class);
+        RxHttp.sendRequest(mLoginServer.collectArticle(id), new Consumer<BaseHttpBean>() {
+            @Override
+            public void accept(BaseHttpBean baseHttpBean) throws Exception {
+                result.success(baseHttpBean);
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                //网络请求失败
+                result.fail(throwable);
+            }
+        });
+    }
+
+    /**
+     * 取消收藏
+     *
+     * @param id
+     * @param originId
+     * @param result
+     */
+    public void RemoveCollectArticle(int id, int originId, final OnResultClick<BaseHttpBean> result) {
+        ApiServer mLoginServer = RxRetrofit.getInstance().create(ApiServer.class);
+        RxHttp.sendRequest(mLoginServer.removeCollectArticle(id, originId), new Consumer<BaseHttpBean>() {
+            @Override
+            public void accept(BaseHttpBean baseHttpBean) throws Exception {
+                result.success(baseHttpBean);
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                //网络请求失败
+                result.fail(throwable);
+            }
+        });
+    }
+
+    /**
+     * 我的收藏
+     *
+     * @param page
+     * @param result
+     */
+    public void CollectArticleList(int page, final OnResultClick<BaseHttpBean> result) {
+        ApiServer mLoginServer = RxRetrofit.getInstance().create(ApiServer.class);
+        RxHttp.sendRequest(mLoginServer.getMyCollectList(page), new Consumer<BaseHttpBean<ArticleBean>>() {
+            @Override
+            public void accept(BaseHttpBean baseHttpBean) throws Exception {
+                result.success(baseHttpBean);
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                //网络请求失败
+                result.fail(throwable);
+            }
+        });
+    }
     /**
      * 导航数据
      *

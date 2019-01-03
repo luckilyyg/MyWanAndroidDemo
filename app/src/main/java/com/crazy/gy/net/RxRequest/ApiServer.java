@@ -4,6 +4,7 @@ package com.crazy.gy.net.RxRequest;
 import com.crazy.gy.entity.BannerListBean;
 import com.crazy.gy.entity.HomeListBean;
 import com.crazy.gy.entity.KnowledgeListBean;
+import com.crazy.gy.entity.ArticleBean;
 import com.crazy.gy.entity.ProjectContentListBean;
 import com.crazy.gy.entity.ProjectListBean;
 import com.crazy.gy.entity.TodoDesBean;
@@ -63,6 +64,16 @@ public interface ApiServer {
 
 
     /**
+     * 知识体系内容
+     * http://www.wanandroid.com/article/list/0/json?cid=60
+     * @param page
+     * @param cid
+     * @return
+     */
+    @GET("article/list/{page}/json/")
+    Flowable<BaseHttpBean<ArticleBean>> getKnowLedgeContentList(@Path("page") int page, @Query("cid") int cid);
+
+    /**
      * 项目
      * http://www.wanandroid.com/project/tree/json
      */
@@ -78,7 +89,7 @@ public interface ApiServer {
      * @return
      */
     @GET("/project/list/{curpage}/json")
-    Flowable<BaseHttpBean<ProjectContentListBean>> getProjectContentList(@Path("curpage") int curpage, @Query("cid") int id);
+    Flowable<BaseHttpBean<ProjectContentListBean>> getProjectContentList(@Path("curpage") int curpage, @Query("cid") int cid);
 
 
     /**
@@ -136,6 +147,40 @@ public interface ApiServer {
     Flowable<BaseHttpBean> deleteToDo(@Path("id") int id);
 
     /**
+     * 收藏文章
+     *
+     * @param id
+     * @return
+     */
+    @POST("/lg/collect/{id}/json")
+    Flowable<BaseHttpBean> collectArticle(@Path("id") int id);
+
+
+    /**
+     * 取消收藏
+     *
+     * @param id
+     * @param originId
+     * http://www.wanandroid.com/lg/uncollect_originId/2333/json
+     * @return
+     */
+    @POST("/lg/uncollect_originId/{id}/json")
+    Flowable<BaseHttpBean> removeCollectArticle(@Path("id") int id, @Query("originId") int originId);
+
+    /**
+     * 我的收藏
+     * @param page
+     * @return
+     */
+    @GET("/lg/collect/list/{page}/json")
+    Flowable<BaseHttpBean<ArticleBean>> getMyCollectList(@Path("page") int page);
+
+
+
+
+
+
+    /**
      *  导航数据
      * @return
      */
@@ -148,56 +193,13 @@ public interface ApiServer {
 //    Flowable<BaseHttpBean<List<HotKey>>> getHotKey();
 
 
-    /**
-     * 取消收藏
-     *
-     * @param id
-     * @param originId
-     * @return
-     */
-//    @POST("/lg/uncollect/{id}/json")
-//    Flowable<BaseHttpBean> getRemoveCollectArticle(@Path("id") int id, @Field("originId") int originId);
-
-
-    /**
-     * 收藏文章
-     *
-     * @param id
-     * @return
-     */
-//    @POST("/lg/collect/{id}/json")
-//    Flowable<BaseHttpBean> getAddCollectArticle(@Path("id") int id);
-
-//http://www.wanandroid.com/lg/todo/listnotdo/0/json/1
-//    http://www.wanandroid.com/lg/todo/listnotdo/类型/json/页码
-
-    /**
-     * 未完成 Todo 列表
-     */
-//    @POST("/lg/todo/listnotdo/0/json/{page}")
-//    Flowable<BaseHttpBean<TodoListBean>> getListNotDoList(@Path("page") int page);
-
-
     //http://www.wanandroid.com/lg/todo/listdone/0/json/1
 //http://www.wanandroid.com/lg/todo/listdone/类型/json/页码
 //    @POST("/lg/todo/listdone/0/json/{page}")
 //    Flowable<BaseHttpBean<TodoListBean>> getListDoneList(@Path("page") int page);
 
 
-//    http://www.wanandroid.com/lg/todo/add/json
 
-    /**
-     * 新增一条Todo
-     *
-     * @param title
-     * @param content
-     * @param date
-     * @return
-     */
-//    @POST("/lg/todo/add/json")
-//    Flowable<BaseHttpBean> addtodo(@Query("title") String title, @Query("content") String content, @Query("date") String date, @Query("type") String type);
-
-//http://www.wanandroid.com/lg/todo/done/80/json
 
     /**
      * 仅更新完成状态Todo
@@ -211,14 +213,7 @@ public interface ApiServer {
 
     //http://www.wanandroid.com/lg/todo/delete/83/json
 
-    /**
-     * 删除
-     *
-     * @param id
-     * @return
-     */
-//    @POST("/lg/todo/delete/{id}/json")
-//    Flowable<BaseHttpBean> deletetodo(@Path("id") int id);
+
 
 
 }

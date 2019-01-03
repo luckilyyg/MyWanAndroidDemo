@@ -1,28 +1,24 @@
-package com.crazy.gy.fragment;
+package com.crazy.gy.ui;
 
-
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.crazy.gy.R;
-import com.crazy.gy.adapter.KnowledgeListAdapter;
-import com.crazy.gy.entity.HomeListBean;
-import com.crazy.gy.entity.KnowledgeListBean;
+import com.crazy.gy.adapter.MyCollectArticleAdapter;
+import com.crazy.gy.entity.ArticleBean;
 import com.crazy.gy.net.RxCallback.OnResultClick;
 import com.crazy.gy.net.RxHttp.BaseHttpBean;
 import com.crazy.gy.net.RxRequest.ApiServerImp;
-import com.crazy.gy.ui.KnowledgeContentActivity;
 import com.crazy.gy.util.ALog;
 import com.crazy.gy.view.DialogText;
 
@@ -32,78 +28,54 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class KnowledgeFragment extends Fragment {
+public class MyCollectionsActivity extends AppCompatActivity {
+
+    @Bind(R.id.img_titleleft)
+    ImageView imgTitleleft;
     @Bind(R.id.tv_titlecontent)
     TextView tvTitlecontent;
-    @Bind(R.id.knowledgerecyclerview)
-    RecyclerView knowledgerecyclerview;
+    @Bind(R.id.collectsrecyclerview)
+    RecyclerView collectsrecyclerview;
     @Bind(R.id.refreshdata)
     SwipeRefreshLayout swipeRefreshData;
     private ApiServerImp mApiServerImp;
     private DialogText mDialog;
+    private Context mContext;
     private LinearLayoutManager linearLayoutManager;
-    private ArrayList<KnowledgeListBean> beanList = new ArrayList<>();
-    private KnowledgeListAdapter listAdapter;
     private int PAGE_SIZE = 15;
     private int page = 0;
-    private Handler handler = new Handler();
-    private List<KnowledgeListBean> listBean;
-
-    public KnowledgeFragment() {
-        // Required empty public constructor
-    }
-
+    private ArrayList<ArticleBean.DatasBean> beanList;
+    private MyCollectArticleAdapter listAdapter;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_knowledge, container, false);
-        ButterKnife.bind(this, view);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_my_collections);
+        ButterKnife.bind(this);
+        mContext = MyCollectionsActivity.this;
         initView();
         initData();
         initAdapter();
         initEvent();
-        return view;
     }
 
-    private void initEvent() {
-        listAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                ArrayList<String> names = new ArrayList<>();
-                ArrayList<Integer> ids = new ArrayList<>();
-                KnowledgeListBean knowledge = listBean.get(position);
-                String knowledgename = knowledge.getName();
-                for (KnowledgeListBean.Children children : knowledge.getChildren()) {
-                    names.add(children.getName());
-                    ids.add(children.getId());
-                }
-                Intent intent = new Intent(getActivity(), KnowledgeContentActivity.class);
-                intent.putStringArrayListExtra("names", names);
-                intent.putIntegerArrayListExtra("ids", ids);
-                intent.putExtra("knowledgename", knowledgename);
-                startActivity(intent);
-            }
-        });
-    }
 
     private void initView() {
-        tvTitlecontent.setText("知识体系");
         mApiServerImp = new ApiServerImp();
-        mDialog = new DialogText(getActivity(), R.style.MyDialog);
-        linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        knowledgerecyclerview.setLayoutManager(linearLayoutManager);
+        mDialog = new DialogText(mContext, R.style.MyDialog);
+        linearLayoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
+        collectsrecyclerview.setLayoutManager(linearLayoutManager);
+        imgTitleleft.setVisibility(View.VISIBLE);
+        imgTitleleft.setImageResource(R.drawable.ic_left);
+        tvTitlecontent.setText("我的收藏");
+
         //设置加载进度的颜色变化值
         swipeRefreshData.setColorSchemeResources(R.color.colorAccent, R.color.colorPrimary, R.color.colorPrimaryDark);
         //设置下拉刷新的监听器
         swipeRefreshData.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                handler.postDelayed(new Runnable() {
+                new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         beanList.clear();
@@ -115,7 +87,7 @@ public class KnowledgeFragment extends Fragment {
     }
 
     private void initData() {
-        mApiServerImp.KnowLedgeListImp(new OnResultClick<BaseHttpBean>() {
+        mApiServerImp.CollectArticleList(0, new OnResultClick<BaseHttpBean>() {
             @Override
             public void success(BaseHttpBean baseHttpBean) {
                 if (swipeRefreshData.isRefreshing()) {
@@ -123,8 +95,9 @@ public class KnowledgeFragment extends Fragment {
                 }
                 if (baseHttpBean != null) {
                     if (baseHttpBean.getErrorCode() == 0) {
-                        listBean = (List<KnowledgeListBean>) baseHttpBean.getData();
-                        setData(true, listBean);
+                        ArticleBean homeList = (ArticleBean) baseHttpBean.getData();
+                        beanList = (ArrayList<ArticleBean.DatasBean>) homeList.getDatas();
+                        setData(true, beanList);
                     } else {
                         mDialog.show();
                         showInfo(baseHttpBean.getErrorMsg(), 0);
@@ -142,9 +115,57 @@ public class KnowledgeFragment extends Fragment {
                 }
             }
         });
+
     }
 
-    private void setData(final boolean isFresh, final List<KnowledgeListBean> mData) {
+    private void initAdapter() {
+        listAdapter = new MyCollectArticleAdapter();
+        listAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+            @Override
+            public void onLoadMoreRequested() {
+                loadMore();
+            }
+        });
+        listAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Intent intent = new Intent(MyCollectionsActivity.this, WebViewActivity.class);
+                intent.putExtra("url", beanList.get(position).getLink());
+                startActivity(intent);
+            }
+        });
+        collectsrecyclerview.setAdapter(listAdapter);
+    }
+
+    private void loadMore() {
+        page++;
+        mApiServerImp.CollectArticleList(page, new OnResultClick<BaseHttpBean>() {
+            @Override
+            public void success(BaseHttpBean baseHttpBean) {
+                if (baseHttpBean != null) {
+                    if (baseHttpBean.getErrorCode() == 0) {
+                        ArticleBean articleList = (ArticleBean) baseHttpBean.getData();
+                        List beanLists = (ArrayList<ArticleBean.DatasBean>) articleList.getDatas();
+                        setData(false, beanLists);
+                    } else {
+                        mDialog.show();
+                        showInfo(baseHttpBean.getErrorMsg(), 0);
+                    }
+                }
+            }
+
+            @Override
+            public void fail(Throwable throwable) {
+                ALog.e(throwable.getMessage());
+                mDialog.show();
+                showInfo(throwable.getMessage(), 0);
+
+            }
+        });
+    }
+
+
+    private void setData(final boolean isFresh, final List<ArticleBean.DatasBean> mData) {
         final int size = mData == null ? 0 : mData.size();
         if (isFresh) {
             listAdapter.setNewData(mData);
@@ -179,12 +200,6 @@ public class KnowledgeFragment extends Fragment {
 
     }
 
-    private void initAdapter() {
-        listAdapter = new KnowledgeListAdapter();
-        knowledgerecyclerview.setAdapter(listAdapter);
-    }
-
-
     /**
      * @param errorString
      * @param is
@@ -208,10 +223,12 @@ public class KnowledgeFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
+    private void initEvent() {
+        imgTitleleft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MyCollectionsActivity.this.finish();
+            }
+        });
     }
-
 }

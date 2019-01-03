@@ -103,6 +103,7 @@ public class ProjectFragment extends Fragment {
     }
 
     private void initAdapter() {
+        
     }
 
     /**

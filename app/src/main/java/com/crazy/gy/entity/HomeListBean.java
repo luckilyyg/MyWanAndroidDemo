@@ -33,6 +33,14 @@ public class HomeListBean implements Serializable {
         this.datas = datas;
     }
 
+    @Override
+    public String toString() {
+        return "HomeListBean{" +
+                "curPage=" + curPage +
+                ", datas=" + datas +
+                '}';
+    }
+
     public class HomeListDetail {
         private String apkLink;
         private String author;

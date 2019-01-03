@@ -10,6 +10,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,11 +24,15 @@ import com.crazy.gy.R;
 import com.crazy.gy.adapter.HomeListAdapter;
 import com.crazy.gy.entity.BannerListBean;
 import com.crazy.gy.entity.HomeListBean;
+import com.crazy.gy.entity.UserBean;
 import com.crazy.gy.net.RxCallback.OnResultClick;
 import com.crazy.gy.net.RxHttp.BaseHttpBean;
 import com.crazy.gy.net.RxRequest.ApiServerImp;
 import com.crazy.gy.ui.LoginActivity;
+import com.crazy.gy.ui.MyCollectionsActivity;
+import com.crazy.gy.ui.WebViewActivity;
 import com.crazy.gy.util.ALog;
+import com.crazy.gy.util.Sharedpreferences_Utils;
 import com.crazy.gy.view.DialogText;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -81,8 +86,10 @@ public class HomeFragment extends Fragment {
         initBannerData();
         initData();
         initAdapter();
+        initItemClick();
         return view;
     }
+
 
     private void initView() {
         tvTitlecontent.setText("首页");
@@ -188,6 +195,7 @@ public class HomeFragment extends Fragment {
                 }
                 if (baseHttpBean != null) {
                     if (baseHttpBean.getErrorCode() == 0) {
+                        Log.d("数据：",baseHttpBean.toString());
                         HomeListBean homeList = (HomeListBean) baseHttpBean.getData();
                         beanList = (ArrayList<HomeListBean.HomeListDetail>) homeList.getDatas();
                         setData(true, beanList);
@@ -254,7 +262,95 @@ public class HomeFragment extends Fragment {
                 loadMore();
             }
         });
+        listAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Intent intent = new Intent(getActivity(), WebViewActivity.class);
+                intent.putExtra("url", beanList.get(position).getLink());
+                startActivity(intent);
+            }
+        });
         homerecyclerview.setAdapter(listAdapter);
+    }
+
+    private void initItemClick() {
+        listAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, final int position) {
+                switch (view.getId()) {
+                    case R.id.ivCollect:
+
+                        //判断有没有登录
+                        int loginId = Sharedpreferences_Utils.getInstance(getActivity()).getInt("userId");
+                        String val = loginId + "";
+                        if (TextUtils.isEmpty(val)) {
+
+                            mDialog.show();
+                            showInfo("未登录", 0);
+
+
+                        } else {
+
+                            //判断当前有没有收藏
+
+
+                            if (beanList.get(position).isCollect()) {
+
+
+                                //取消收藏
+                                mApiServerImp.RemoveCollectArticle(beanList.get(position).getId(), loginId, new OnResultClick<BaseHttpBean>() {
+                                    @Override
+                                    public void success(BaseHttpBean baseHttpBean) {
+                                        if (baseHttpBean != null) {
+                                            if (baseHttpBean.getErrorCode() == 0) {
+
+                                                beanList.get(position).setCollect(!beanList.get(position).isCollect());
+                                                listAdapter.notifyDataSetChanged();
+                                            } else {
+                                                mDialog.show();
+                                                showInfo(baseHttpBean.getErrorMsg(), 0);
+                                            }
+                                        }
+                                    }
+
+                                    @Override
+                                    public void fail(Throwable throwable) {
+                                        mDialog.show();
+                                        showInfo(throwable.getMessage(), 0);
+                                    }
+                                });
+                            } else {
+
+                                //收藏
+                                mApiServerImp.CollectArticle(beanList.get(position).getId(), new OnResultClick<BaseHttpBean>() {
+                                    @Override
+                                    public void success(BaseHttpBean baseHttpBean) {
+                                        if (baseHttpBean != null) {
+                                            if (baseHttpBean.getErrorCode() == 0) {
+                                                beanList.get(position).setCollect(!beanList.get(position).isCollect());
+                                                listAdapter.notifyDataSetChanged();
+                                            } else {
+                                                mDialog.show();
+                                                showInfo(baseHttpBean.getErrorMsg(), 0);
+                                            }
+                                        }
+                                    }
+
+                                    @Override
+                                    public void fail(Throwable throwable) {
+                                        mDialog.show();
+                                        showInfo(throwable.getMessage(), 0);
+                                    }
+                                });
+                            }
+
+                        }
+                        break;
+                }
+            }
+        });
+
+
     }
 
     @Override

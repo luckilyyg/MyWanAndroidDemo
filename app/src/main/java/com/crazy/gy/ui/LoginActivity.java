@@ -25,7 +25,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- *  Toast.makeText(MainActivity.this, "userId:", Toast.LENGTH_LONG).show();
+ * Toast.makeText(MainActivity.this, "userId:", Toast.LENGTH_LONG).show();
  * 账号：xiabibi
  * 密码：123456
  */
@@ -42,6 +42,7 @@ public class LoginActivity extends AppCompatActivity {
     private Context mContext;
     private ApiServerImp mApiServerImp;
     private DialogText mDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +76,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void initData() {
-
     }
 
     @OnClick(R.id.btn_login_commit)
