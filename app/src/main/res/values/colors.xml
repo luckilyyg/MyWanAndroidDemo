@@ -25,7 +25,13 @@
     <color name="black30">#44000000</color>
     <color name="black20">#33000000</color>
     <color name="black10">#22000000</color>
-
+    <color name="deep_grey">#e6e6e6</color>
+    <color name="comment_line">#dddddd</color>
+    <color name="shallow_green">#FF36BC9B</color>
+    <color name="shallow_grey">#FF757575</color>
+    <color name="comment_text">#5b5d5c</color>
+    <color name="while_most_color">#e4e4e4</color>
+    <color name="colorBackground">#EEEEEE</color>
     <!-- 分割线的颜色 -->
     <color name="colorLine">#ECECEC</color>
     <!-- 按钮按压时的颜色 -->
@@ -34,4 +40,5 @@
     <color name="colorButtonDisable">#DDDDDD</color>
     <!--半透明-->
     <color name="hint_back">#98000000</color>
+    <color name="sign">#B2B2B2</color>
 </resources>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:orientation="vertical"
+    tools:context=".fragment.NavigationFragment">
+
+    <include layout="@layout/layout_title"></include>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <q.rorbin.verticaltablayout.VerticalTabLayout
+            android:id="@+id/navigation_tab_layout"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:background="@color/deep_grey"
+            app:tab_height="50dp"
+            app:indicator_color="@color/white"
+            app:indicator_gravity="fill"
+            app:tab_margin="15dp"
+            app:tab_mode="scrollable"
+           ></q.rorbin.verticaltablayout.VerticalTabLayout>
+
+        <View
+            android:id="@+id/navigation_divider"
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:background="@color/comment_line"
+            android:visibility="invisible" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/navigation_RecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+</LinearLayout>

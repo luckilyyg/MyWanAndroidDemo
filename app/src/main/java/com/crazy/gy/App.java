@@ -17,7 +17,8 @@ public class App extends Application {
     public static Context mContext;
 
     //服务器地址
-    public static String path = "http://www.wanandroid.com/";
+    public static String path = "https://www.wanandroid.com/";
+
 
 
 
@@ -36,9 +37,6 @@ public class App extends Application {
         super.onCreate();
         mContext=getApplicationContext();
     }
-
-
-
 
     //返回
     public static Context getContextObject(){

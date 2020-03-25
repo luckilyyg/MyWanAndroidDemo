@@ -4,6 +4,7 @@ import com.crazy.gy.entity.BannerListBean;
 import com.crazy.gy.entity.HomeListBean;
 import com.crazy.gy.entity.KnowledgeListBean;
 import com.crazy.gy.entity.ArticleBean;
+import com.crazy.gy.entity.NavigationListBean;
 import com.crazy.gy.entity.ProjectContentListBean;
 import com.crazy.gy.entity.ProjectListBean;
 import com.crazy.gy.entity.TodoDesBean;
@@ -181,6 +182,25 @@ public class ApiServerImp {
         });
     }
 
+    /**
+     * 导航
+     * @param result
+     */
+    public void NavigationListImp(final OnResultClick<BaseHttpBean> result) {
+        ApiServer mLoginServer = RxRetrofit.getInstance().create(ApiServer.class);
+        RxHttp.sendRequest(mLoginServer.getNavigationList(), new Consumer<BaseHttpBean<List<NavigationListBean>>>() {
+            @Override
+            public void accept(BaseHttpBean baseHttpBean) throws Exception {
+                result.success(baseHttpBean);
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                //网络请求失败
+                result.fail(throwable);
+            }
+        });
+    }
 
     /**
      * 项目内容

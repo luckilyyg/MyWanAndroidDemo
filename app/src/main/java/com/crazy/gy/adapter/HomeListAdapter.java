@@ -33,5 +33,6 @@ public class HomeListAdapter extends BaseQuickAdapter<HomeListBean.HomeListDetai
         helper.setText(R.id.tvChapterName, item.getChapterName());
         helper.setImageResource(R.id.ivCollect, item.isCollect() ? R.drawable.ic_collect : R.drawable.ic_nocollect);
         helper.addOnClickListener(R.id.ivCollect);
+        helper.addOnClickListener(R.id.img_authorheadpic);
     }
 }

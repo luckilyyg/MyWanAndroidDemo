@@ -51,7 +51,7 @@ public class KnowledgeFragment extends Fragment {
     private int page = 0;
     private Handler handler = new Handler();
     private List<KnowledgeListBean> listBean;
-
+    private static final String TAG = "KnowledgeFragment";
     public KnowledgeFragment() {
         // Required empty public constructor
     }
@@ -115,6 +115,7 @@ public class KnowledgeFragment extends Fragment {
     }
 
     private void initData() {
+        Log.e(TAG, "initData: " );
         mApiServerImp.KnowLedgeListImp(new OnResultClick<BaseHttpBean>() {
             @Override
             public void success(BaseHttpBean baseHttpBean) {

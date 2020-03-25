@@ -1,4 +1,4 @@
-package com.crazy.gy;
+package com.crazy.gy.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,15 +16,20 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.crazy.gy.R;
 import com.crazy.gy.adapter.MyPageAdapter;
+import com.crazy.gy.entity.Event_Msg;
 import com.crazy.gy.fragment.HomeFragment;
 import com.crazy.gy.fragment.KnowledgeFragment;
+import com.crazy.gy.fragment.NavigationFragment;
 import com.crazy.gy.fragment.ProjectFragment;
 import com.crazy.gy.fragment.ToDoFragment;
-import com.crazy.gy.ui.LoginActivity;
-import com.crazy.gy.ui.MyCollectionsActivity;
 import com.crazy.gy.util.Sharedpreferences_Utils;
 import com.crazy.gy.view.NoScrollViewPager;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 
@@ -54,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        EventBus.getDefault().register(this);
         initView();
         initPager();
         initData();
@@ -64,18 +70,25 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    public void getMethod(Event_Msg msg) {
+        vpHomePager.setCurrentItem(2);
+    }
+
     private void initPager() {
         mFragmentList = new ArrayList<>();
         mFragmentList.add(new HomeFragment());
         mFragmentList.add(new KnowledgeFragment());
         mFragmentList.add(new ProjectFragment());
+        mFragmentList.add(new NavigationFragment());
         mFragmentList.add(new ToDoFragment());
         mBottomNavigationBar.addTab(mBottomNavigationBar.newTab());
         mBottomNavigationBar.addTab(mBottomNavigationBar.newTab());
         mBottomNavigationBar.addTab(mBottomNavigationBar.newTab());
         mBottomNavigationBar.addTab(mBottomNavigationBar.newTab());
+        mBottomNavigationBar.addTab(mBottomNavigationBar.newTab());
         //缓存3个Fragment
-        vpHomePager.setOffscreenPageLimit(3);
+        vpHomePager.setOffscreenPageLimit(1);
         //通过适配器把Fragment添加到主界面上
         vpHomePager.setAdapter(new MyPageAdapter(getSupportFragmentManager(), mFragmentList));
         //把tab和ViewPager关联起来,并会将文字清空
@@ -84,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
         mBottomNavigationBar.getTabAt(1).setCustomView(getCustomView(1));
         mBottomNavigationBar.getTabAt(2).setCustomView(getCustomView(2));
         mBottomNavigationBar.getTabAt(3).setCustomView(getCustomView(3));
+        mBottomNavigationBar.getTabAt(4).setCustomView(getCustomView(4));
         //默认设置显示页面
         vpHomePager.setCurrentItem(0);
     }
@@ -97,6 +111,8 @@ public class MainActivity extends AppCompatActivity {
             case 2:
                 return LayoutInflater.from(this).inflate(R.layout.fragment_project_tab, null);
             case 3:
+                return LayoutInflater.from(this).inflate(R.layout.fragment_navgation_tab, null);
+            case 4:
                 return LayoutInflater.from(this).inflate(R.layout.fragment_todo_tab, null);
 
         }
@@ -106,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
     private void initData() {
         View drawheadview = drawerNavigation.getHeaderView(0);
         TextView nick_name = drawheadview.findViewById(R.id.nick_name);
-        nick_name.setText(Sharedpreferences_Utils.getInstance(MainActivity.this).getString("niName"));
+        nick_name.setText(Sharedpreferences_Utils.getInstance().getString("niName"));
         drawerNavigation.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -117,9 +133,10 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.setting:
                         break;
                     case R.id.about:
+                        startActivity(new Intent(MainActivity.this,AboutActivity.class));
                         break;
                     case R.id.logout:
-                        Sharedpreferences_Utils.getInstance(MainActivity.this).clear();
+                        Sharedpreferences_Utils.getInstance().clear();
                         startActivity(new Intent(MainActivity.this, LoginActivity.class));
                         break;
                 }
@@ -160,5 +177,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         ButterKnife.unbind(this);
+        EventBus.getDefault().unregister(this);
     }
 }

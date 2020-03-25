@@ -3,6 +3,8 @@ package com.crazy.gy.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.crazy.gy.App;
+
 public class Sharedpreferences_Utils {
     private SharedPreferences mPreferences;
     private final static String PREFERENCE_NAME="userInfo";//偏好设置存储文件名
@@ -12,11 +14,11 @@ public class Sharedpreferences_Utils {
         mPreferences=context.getSharedPreferences(PREFERENCE_NAME,Context.MODE_PRIVATE);
     }
 
-    public static Sharedpreferences_Utils getInstance(Context context){
+    public static Sharedpreferences_Utils getInstance(){
         if(mUtils==null){
             synchronized (Sharedpreferences_Utils.class){
                 if(mUtils==null)
-                    mUtils=new Sharedpreferences_Utils(context);
+                    mUtils=new Sharedpreferences_Utils(App.getContextObject());
             }
         }
         return mUtils;

@@ -18,6 +18,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * 网络请求初始化操作类
+ *
+ * 在项目开发过程中遇到 也许域名会不一样
+ * 这样就会导致 链接的path不一样 所以需要写一个方法用来区别
  */
 
 public class RxRetrofit {
@@ -72,9 +75,24 @@ public class RxRetrofit {
         return mRxRetrofit;
     }
 
+
+    //写个方法为了区别域名
+    //域名
+//    public static void changeApiShop() {
+//        path = MyApplication.ShopServerPath;
+//        mRxRetrofit = new RxRetrofit();
+//    }
+//    //图片上传
+//    public static void changeApiBaseUrl() {
+//        path = MyApplication.ShopImgUploadPath;
+//        mRxRetrofit = new RxRetrofit();
+//    }
+
     public <T> T create(Class<T> tClass) {
         return mRetrofit.create(tClass);
     }
+
+
 
 
 }

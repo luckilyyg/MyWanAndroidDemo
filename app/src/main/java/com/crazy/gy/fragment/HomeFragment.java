@@ -19,17 +19,13 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.crazy.gy.MainActivity;
 import com.crazy.gy.R;
 import com.crazy.gy.adapter.HomeListAdapter;
 import com.crazy.gy.entity.BannerListBean;
 import com.crazy.gy.entity.HomeListBean;
-import com.crazy.gy.entity.UserBean;
 import com.crazy.gy.net.RxCallback.OnResultClick;
 import com.crazy.gy.net.RxHttp.BaseHttpBean;
 import com.crazy.gy.net.RxRequest.ApiServerImp;
-import com.crazy.gy.ui.LoginActivity;
-import com.crazy.gy.ui.MyCollectionsActivity;
 import com.crazy.gy.ui.WebViewActivity;
 import com.crazy.gy.util.ALog;
 import com.crazy.gy.util.Sharedpreferences_Utils;
@@ -50,7 +46,7 @@ import butterknife.ButterKnife;
  */
 public class HomeFragment extends Fragment {
 
-
+    private static final String TAG = "HomeFragment";
     @Bind(R.id.tv_titlecontent)
     TextView tvTitlecontent;
     @Bind(R.id.homerecyclerview)
@@ -187,6 +183,7 @@ public class HomeFragment extends Fragment {
 
 
     private void initData() {
+        Log.e(TAG, "initData: ");
         mApiServerImp.HomeListImp(page, new OnResultClick<BaseHttpBean>() {
             @Override
             public void success(BaseHttpBean baseHttpBean) {
@@ -195,7 +192,7 @@ public class HomeFragment extends Fragment {
                 }
                 if (baseHttpBean != null) {
                     if (baseHttpBean.getErrorCode() == 0) {
-                        Log.d("数据：",baseHttpBean.toString());
+                        Log.d("数据：", baseHttpBean.toString());
                         HomeListBean homeList = (HomeListBean) baseHttpBean.getData();
                         beanList = (ArrayList<HomeListBean.HomeListDetail>) homeList.getDatas();
                         setData(true, beanList);
@@ -281,7 +278,7 @@ public class HomeFragment extends Fragment {
                     case R.id.ivCollect:
 
                         //判断有没有登录
-                        int loginId = Sharedpreferences_Utils.getInstance(getActivity()).getInt("userId");
+                        int loginId = Sharedpreferences_Utils.getInstance().getInt("userId");
                         String val = loginId + "";
                         if (TextUtils.isEmpty(val)) {
 
@@ -345,6 +342,8 @@ public class HomeFragment extends Fragment {
                             }
 
                         }
+                        break;
+                    case R.id.img_authorheadpic:
                         break;
                 }
             }

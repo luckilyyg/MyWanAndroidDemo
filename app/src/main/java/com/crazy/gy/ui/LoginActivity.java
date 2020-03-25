@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import com.crazy.gy.MainActivity;
 import com.crazy.gy.R;
 import com.crazy.gy.entity.UserBean;
 import com.crazy.gy.net.RxCallback.OnResultClick;
@@ -104,9 +103,9 @@ public class LoginActivity extends AppCompatActivity {
                     if (baseHttpBean.getErrorCode() == 0) {
                         int userId = ((UserBean) baseHttpBean.getData()).getId();
                         String niName = ((UserBean) baseHttpBean.getData()).getUsername();
-                        Sharedpreferences_Utils.getInstance(mContext).setInt("userId", ((UserBean) baseHttpBean.getData()).getId());
-                        Sharedpreferences_Utils.getInstance(mContext).setString("niName", ((UserBean) baseHttpBean.getData()).getUsername());
-                        Sharedpreferences_Utils.getInstance(mContext).setString("userPassword", ((UserBean) baseHttpBean.getData()).getPassword());
+                        Sharedpreferences_Utils.getInstance().setInt("userId", ((UserBean) baseHttpBean.getData()).getId());
+                        Sharedpreferences_Utils.getInstance().setString("niName", ((UserBean) baseHttpBean.getData()).getUsername());
+                        Sharedpreferences_Utils.getInstance().setString("userPassword", ((UserBean) baseHttpBean.getData()).getPassword());
                         showInfo("登录成功", 1);
                     } else {
                         showInfo(baseHttpBean.getErrorMsg(), 0);

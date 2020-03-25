@@ -28,6 +28,7 @@ public class ClearEditText extends AppCompatEditText implements View.OnTouchList
     private OnTouchListener mOnTouchListener;
     private OnFocusChangeListener mOnFocusChangeListener;
 
+
     public ClearEditText(final Context context) {
         super(context);
         initialize(context);

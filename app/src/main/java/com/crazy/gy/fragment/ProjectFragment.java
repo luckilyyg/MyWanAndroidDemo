@@ -3,6 +3,8 @@ package com.crazy.gy.fragment;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -42,7 +44,7 @@ public class ProjectFragment extends Fragment {
     private ApiServerImp mApiServerImp;
     private DialogText mDialog;
     private ProjectPagerAdapter projectPagerAdapter;
-
+    private static final String TAG = "ProjectFragment";
     public ProjectFragment() {
         // Required empty public constructor
     }
@@ -57,6 +59,7 @@ public class ProjectFragment extends Fragment {
         initView();
         initData();
         initAdapter();
+        Log.e(TAG, "onCreateView: " );
         return view;
     }
 
@@ -65,6 +68,19 @@ public class ProjectFragment extends Fragment {
         mApiServerImp = new ApiServerImp();
         mDialog = new DialogText(getActivity(), R.style.MyDialog);
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.e(TAG, "onResume: " );
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.e(TAG, "onStart: " );
+    }
+
 
     private void initData() {
         mApiServerImp.ProjectListImp(new OnResultClick<BaseHttpBean>() {
@@ -100,6 +116,18 @@ public class ProjectFragment extends Fragment {
 
             }
         });
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        Log.e(TAG, "onViewCreated: " );
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        Log.e(TAG, "onActivityCreated: " );
     }
 
     private void initAdapter() {

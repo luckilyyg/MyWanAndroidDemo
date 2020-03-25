@@ -14,6 +14,9 @@
         android:layout_height="match_parent">
 
         <android.support.v7.widget.RecyclerView
+            android:scrollbarSize="20dp"
+            android:scrollbarThumbVertical="@android:color/holo_blue_dark"
+            android:scrollbars="vertical"
             android:id="@+id/homerecyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>

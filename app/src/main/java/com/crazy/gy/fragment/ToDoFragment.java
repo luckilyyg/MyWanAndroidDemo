@@ -26,8 +26,6 @@ import butterknife.OnClick;
  * A simple {@link Fragment} subclass.
  */
 public class ToDoFragment extends Fragment {
-
-
     @Bind(R.id.tv_titlecontent)
     TextView tvTitlecontent;
     @Bind(R.id.tab)
@@ -39,7 +37,7 @@ public class ToDoFragment extends Fragment {
     private String[] titles = {"待办清单", "已完成清单"};
     private List<Fragment> list;
     private MyAdapter adapter;
-
+    private static final String TAG = "ToDoFragment";
     public ToDoFragment() {
         // Required empty public constructor
     }

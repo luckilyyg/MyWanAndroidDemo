@@ -8,6 +8,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,7 +52,7 @@ public class ToDoContentFragment extends Fragment {
     List<TodoSection> todoSectionList = new ArrayList<>();
     private int donePosition = -1;
     private int deletePosition = -1;
-
+    private static final String TAG = "ToDoContentFragment";
     public ToDoContentFragment() {
         // Required empty public constructor
     }
@@ -104,6 +105,7 @@ public class ToDoContentFragment extends Fragment {
     }
 
     private void initDate(boolean isDone) {
+        Log.e(TAG, "initDate: " );
         mApiServerImp.ToDoListImp(isDone, 1, new OnResultClick<BaseHttpBean>() {
             @Override
             public void success(BaseHttpBean baseHttpBean) {

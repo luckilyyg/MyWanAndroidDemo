@@ -5,6 +5,7 @@ import com.crazy.gy.entity.BannerListBean;
 import com.crazy.gy.entity.HomeListBean;
 import com.crazy.gy.entity.KnowledgeListBean;
 import com.crazy.gy.entity.ArticleBean;
+import com.crazy.gy.entity.NavigationListBean;
 import com.crazy.gy.entity.ProjectContentListBean;
 import com.crazy.gy.entity.ProjectListBean;
 import com.crazy.gy.entity.TodoDesBean;
@@ -82,6 +83,13 @@ public interface ApiServer {
     Flowable<BaseHttpBean<List<ProjectListBean>>> getProjectList();
 
 
+    /**
+     * 导航
+     * https://www.wanandroid.com/navi/json
+     * @return
+     */
+    @GET("navi/json")
+    Flowable<BaseHttpBean<List<NavigationListBean>>> getNavigationList();
     /**
      * 项目内容
      * http://www.wanandroid.com/project/list/1/json?cid=294
