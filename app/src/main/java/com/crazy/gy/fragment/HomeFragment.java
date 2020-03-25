@@ -26,6 +26,7 @@ import com.crazy.gy.entity.HomeListBean;
 import com.crazy.gy.net.RxCallback.OnResultClick;
 import com.crazy.gy.net.RxHttp.BaseHttpBean;
 import com.crazy.gy.net.RxRequest.ApiServerImp;
+import com.crazy.gy.ui.NewWebViewActivity;
 import com.crazy.gy.ui.WebViewActivity;
 import com.crazy.gy.util.ALog;
 import com.crazy.gy.util.Sharedpreferences_Utils;
@@ -262,7 +263,8 @@ public class HomeFragment extends Fragment {
         listAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent = new Intent(getActivity(), WebViewActivity.class);
+//                Intent intent = new Intent(getActivity(), WebViewActivity.class);
+                Intent intent = new Intent(getActivity(), NewWebViewActivity.class);
                 intent.putExtra("url", beanList.get(position).getLink());
                 startActivity(intent);
             }
