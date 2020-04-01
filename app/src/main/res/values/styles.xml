@@ -63,4 +63,15 @@
         <item name="android:background">@color/bg</item>
         <item name="android:orientation">vertical</item>
     </style>
+    <!-- 设置 -->
+    <style name="AppTheme_toolbar" parent="AppTheme">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/dp_50</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+    </style>
+    <!--搜索栏 光标颜色-->
+    <style name="EditText" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="colorAccent">@color/white_90</item>
+    </style>
 </resources>

@@ -4,9 +4,9 @@
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
@@ -17,20 +17,30 @@
         android:roundIcon="@mipmap/ic_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.NewWebViewActivity"></activity>
-        <activity android:name=".ui.MainActivity" />
-        <activity android:name=".base.BaseActivity" />
-        <activity android:name=".ui.RegisterActivity" />
-        <activity android:name=".ui.LoginActivity" />
-        <activity android:name=".ui.MyCollectionsActivity" />
-        <activity android:name=".ui.WebViewActivity" />
-        <activity android:name=".ui.FirstActivity">
+        <activity android:name=".mvp.ui.activity.CollectionListActivity"></activity>
+        <activity android:name=".mvp.ui.activity.AboutMeActivity" />
+        <activity android:name=".mvp.ui.activity.SystemDetailActivity" />
+        <activity android:name=".mvp.ui.activity.SearechDetailActivity" />
+        <activity android:name=".mvp.ui.activity.SearechActivity" />
+        <activity android:name=".mvp.ui.activity.HotActivity" />
+        <activity android:name=".mvp.ui.activity.HomeDetailActivity" />
+        <activity android:name=".mvp.ui.activity.mLoginActivity" />
+        <activity android:name=".mvp.ui.activity.mMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".mvp.base.mBaseActivity" />
+        <activity android:name=".ui.NewWebViewActivity" />
+        <activity android:name=".ui.MainActivity" />
+        <activity android:name=".base.BaseActivity" />
+        <activity android:name=".ui.RegisterActivity" />
+        <activity android:name=".ui.LoginActivity" />
+        <activity android:name=".ui.MyCollectionsActivity" />
+        <activity android:name=".ui.WebViewActivity" />
+        <activity android:name=".ui.FirstActivity" />
         <activity android:name=".ui.KnowledgeContentActivity" />
         <activity android:name=".ui.AboutActivity" />
     </application>

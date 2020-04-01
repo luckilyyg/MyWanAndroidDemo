@@ -1,5 +1,6 @@
 package com.crazy.gy.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -7,7 +8,7 @@ import java.util.List;
  * date: 2018/9/18
  */
 
-public class KnowledgeListBean {
+public class KnowledgeListBean implements Serializable {
         private List<Children> children;
         private int courseId;
         private int id;
@@ -66,7 +67,7 @@ public class KnowledgeListBean {
 
 
 
-    public class Children {
+    public class Children implements Serializable{
 
         private List<String> children;
         private int courseId;

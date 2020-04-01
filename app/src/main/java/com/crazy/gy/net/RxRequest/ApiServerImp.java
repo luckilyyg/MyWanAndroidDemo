@@ -349,7 +349,7 @@ public class ApiServerImp {
      */
     public void RemoveCollectArticle(int id, int originId, final OnResultClick<BaseHttpBean> result) {
         ApiServer mLoginServer = RxRetrofit.getInstance().create(ApiServer.class);
-        RxHttp.sendRequest(mLoginServer.removeCollectArticle(id, originId), new Consumer<BaseHttpBean>() {
+        RxHttp.sendRequest(mLoginServer.removeCollectArticle(id), new Consumer<BaseHttpBean>() {
             @Override
             public void accept(BaseHttpBean baseHttpBean) throws Exception {
                 result.success(baseHttpBean);

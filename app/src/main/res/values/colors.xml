@@ -32,8 +32,36 @@
     <color name="bg">#F0F0F0</color>
     <color name="shallow_grey">#FF757575</color>
     <color name="comment_text">#5b5d5c</color>
+    <!--<color name="black_90">#e000</color>-->
     <color name="while_most_color">#e4e4e4</color>
     <color name="colorBackground">#EEEEEE</color>
+    <color name="light_red">#e26d2e</color>
+    <color name="white_255">#ffffff</color>
+    <color name="white_90">#efff</color>
+    <color name="white_15">#2fff</color><!--纯白-->
+    <color name="white_30">#4fff</color><!--纯白-->
+    <color name="white_50">#8fff</color><!--纯白-->
+    <!--<color name="grey">#cccccc</color>-->
+    <color name="homepage_color">#484848</color>
+    <!--<color name="black_255">#000</color>-->
+    <!--<color name="black_90">#e000</color>-->
+    <!--<color name="black_50">#8000</color>-->
+    <!--<color name="black_30">#4000</color>-->
+    <!--<color name="black_15">#2000</color>-->
+    <!--<color name="grey">#efefef</color>-->
+    <color name="finish">#767676</color>
+    <color name="red">#FFf9382a</color>
+    <color name="theme">#03A9F4</color>
+    <color name="transparent">#00000000</color>
+    <!--<color name="white_255">#ffffff</color>-->
+    <color name="select">#ff595f</color>
+    <color name="black_255">#000</color>
+    <color name="black_90">#e000</color>
+    <color name="black_50">#8000</color>
+    <color name="black_30">#4000</color>
+    <color name="black_15">#2000</color>
+    <color name="grey">#efefef</color>
+    <color name="theme_pressed">#44a7d4</color>
     <!-- 分割线的颜色 -->
     <color name="colorLine">#ECECEC</color>
     <!-- 按钮按压时的颜色 -->
@@ -43,4 +71,15 @@
     <!--半透明-->
     <color name="hint_back">#98000000</color>
     <color name="sign">#B2B2B2</color>
+    <color name="text_dark">#878787</color>
+    <color name="green">#3ddd62</color>
+
+    <color name="text_color">#484848</color>
+    <color name="text_hint">#c7c7cd</color>
+    <color name="text_light">#E3E3E5</color>
+    <color name="text_black">#484848</color>
+    <color name="text_deep">#686868</color>
+    <!--<color name="text_dark">#878787</color>-->
+    <color name="text_grey">#999999</color>
+    <color name="text_green">#99e288</color>
 </resources>

@@ -2,7 +2,13 @@ package com.crazy.gy.net.RxRequest;
 
 
 import com.crazy.gy.entity.BannerListBean;
+import com.crazy.gy.entity.CollectBean;
+import com.crazy.gy.entity.DemoDetailListBean;
+import com.crazy.gy.entity.DemoTitleBean;
 import com.crazy.gy.entity.HomeListBean;
+import com.crazy.gy.entity.HotBean;
+import com.crazy.gy.entity.HotKeyBean;
+import com.crazy.gy.entity.KnowledgeDetailListBean;
 import com.crazy.gy.entity.KnowledgeListBean;
 import com.crazy.gy.entity.ArticleBean;
 import com.crazy.gy.entity.NavigationListBean;
@@ -11,11 +17,14 @@ import com.crazy.gy.entity.ProjectListBean;
 import com.crazy.gy.entity.TodoDesBean;
 import com.crazy.gy.entity.TodoListBean;
 import com.crazy.gy.entity.UserBean;
+import com.crazy.gy.entity.WxListBean;
+import com.crazy.gy.entity.WxPublicListBean;
 import com.crazy.gy.net.RxHttp.BaseHttpBean;
 
 import java.util.List;
 
 import io.reactivex.Flowable;
+import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -57,13 +66,23 @@ public interface ApiServer {
     Flowable<BaseHttpBean<List<BannerListBean>>> getBannerList();
 
     /**
+     * 获取 热门词
+     */
+    @GET("/friend/json")
+    Flowable<BaseHttpBean<List<HotBean>>> getHotList();
+
+    /**
      * 知识体系
      * http://www.wanandroid.com/tree/json
      */
     @GET("tree/json/")
     Flowable<BaseHttpBean<List<KnowledgeListBean>>> getKnowLedgeList();
 
-
+    /**
+     * 单个知识体系列表
+     */
+    @GET("article/list/{page}/json")
+    Flowable<BaseHttpBean<KnowledgeDetailListBean>> getSystemDetailList(@Path("page") int page, @Query("cid") int id);
     /**
      * 知识体系内容
      * http://www.wanandroid.com/article/list/0/json?cid=60
@@ -75,13 +94,42 @@ public interface ApiServer {
     @GET("article/list/{page}/json/")
     Flowable<BaseHttpBean<ArticleBean>> getKnowLedgeContentList(@Path("page") int page, @Query("cid") int cid);
 
+
+    /**
+     * 获取 微信公众号列表
+     * @return
+     */
+    @GET("/wxarticle/chapters/json")
+    Flowable<BaseHttpBean<List<WxListBean>>> getWXList();
+
+    /**
+     * 获取 微信公众号详细信息列表数据
+     */
+    @GET("wxarticle/list/{id}/{page}/json")
+    Flowable<BaseHttpBean<WxPublicListBean>> getWXDetailList(@Path("page") int page , @Path("id")int id);
+
+    /**
+     * 获取项目 列表
+     */
+    @GET("project/tree/json")
+    Flowable<BaseHttpBean<List<DemoTitleBean>>> getDemoTitleList();
+    /**
+     * 获取 项目详细信息列表数据
+     */
+    @GET("project/list/{page}/json")
+    Flowable<BaseHttpBean<DemoDetailListBean>> getDemoDetailList(@Path("page") int page , @Query("cid")int id);
+
     /**
      * 项目
      * http://www.wanandroid.com/project/tree/json
      */
     @GET("project/tree/json")
     Flowable<BaseHttpBean<List<ProjectListBean>>> getProjectList();
-
+    /**
+     * 获取 我的收藏列表
+     */
+    @GET("lg/collect/list/{page}/json")
+    Flowable<BaseHttpBean<CollectBean>> getCollectionList(@Path("page") int page);
 
     /**
      * 导航
@@ -173,7 +221,7 @@ public interface ApiServer {
      * @return
      */
     @POST("/lg/uncollect_originId/{id}/json")
-    Flowable<BaseHttpBean> removeCollectArticle(@Path("id") int id, @Query("originId") int originId);
+    Flowable<BaseHttpBean> removeCollectArticle(@Path("id") int id);
 
     /**
      * 我的收藏
@@ -184,6 +232,23 @@ public interface ApiServer {
     @GET("/lg/collect/list/{page}/json")
     Flowable<BaseHttpBean<ArticleBean>> getMyCollectList(@Path("page") int page);
 
+
+    /**
+     * 获取 搜索热词
+     * @return
+     */
+    @GET("/hotkey/json")
+    Flowable<BaseHttpBean<List<HotKeyBean>>> getHitKeyBean();
+
+    /**
+     *
+     * 查询搜索结果
+     * @param page
+     * @param key
+     * @return
+     */
+    @POST("/article/query/{page}/json")
+    Flowable<BaseHttpBean<HomeListBean>> getSearechResults(@Path("page") int page ,@Query("k")String key);
     /**
      * 退出登录
      *

@@ -1,6 +1,8 @@
 package com.crazy.gy.net.RxHttp;
 
 
+import android.util.Log;
+
 import com.crazy.gy.App;
 import com.crazy.gy.util.ALog;
 import com.franmontiel.persistentcookiejar.PersistentCookieJar;
@@ -37,6 +39,7 @@ public class RxRetrofit {
             @Override
             public void log(String message) {
                 ALog.w("HTTP:" + message);
+                Log.e("rx", "HTTP: "+message );
             }
         });
         logInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
