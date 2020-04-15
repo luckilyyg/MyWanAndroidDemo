@@ -16,6 +16,7 @@ import com.crazy.gy.R;
 import com.crazy.gy.mvp.base.BaseFragment;
 import com.crazy.gy.mvp.ui.activity.AboutMeActivity;
 import com.crazy.gy.mvp.ui.activity.CollectionListActivity;
+import com.crazy.gy.mvp.ui.activity.TodoMainActivity;
 import com.crazy.gy.mvp.util.ConstantUtil;
 import com.crazy.gy.mvp.util.JumpUtil;
 import com.crazy.gy.mvp.util.Sharedpreferences_Utils;
@@ -91,7 +92,7 @@ public class mMineFragment extends BaseFragment {
                 JumpUtil.overlay(activity, CollectionListActivity.class);
                 break;
             case R.id.view_todo:
-                ToastUtil.show(activity, getString(R.string.todo_err_msg));
+                JumpUtil.overlay(activity, TodoMainActivity.class);
                 break;
             case R.id.view_about:
                 JumpUtil.overlay(activity, AboutMeActivity.class);

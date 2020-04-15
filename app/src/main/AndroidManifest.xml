@@ -17,7 +17,9 @@
         android:roundIcon="@mipmap/ic_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".mvp.ui.activity.CollectionListActivity"></activity>
+        <activity android:name=".mvp.ui.activity.AddTodoActivity"></activity>
+        <activity android:name=".mvp.ui.activity.TodoMainActivity" />
+        <activity android:name=".mvp.ui.activity.CollectionListActivity" />
         <activity android:name=".mvp.ui.activity.AboutMeActivity" />
         <activity android:name=".mvp.ui.activity.SystemDetailActivity" />
         <activity android:name=".mvp.ui.activity.SearechDetailActivity" />
@@ -40,7 +42,9 @@
         <activity android:name=".ui.LoginActivity" />
         <activity android:name=".ui.MyCollectionsActivity" />
         <activity android:name=".ui.WebViewActivity" />
-        <activity android:name=".ui.FirstActivity" />
+        <activity android:name=".ui.FirstActivity" >
+
+        </activity>
         <activity android:name=".ui.KnowledgeContentActivity" />
         <activity android:name=".ui.AboutActivity" />
     </application>

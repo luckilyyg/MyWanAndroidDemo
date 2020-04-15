@@ -82,7 +82,7 @@ public class mHomeFragment extends BaseFragment implements HomeContract.View, Ho
     protected void initUI() {
         super.initUI();
         showLoading();
-        rv.setLayoutManager(new LinearLayoutManager(context));
+        rv.setLayoutManager(new LinearLayoutManager(activity));
         bannerView = (LinearLayout) getLayoutInflater().inflate(R.layout.view_banner, null);
         banner = bannerView.findViewById(R.id.banner);
         bannerView.removeView(banner);

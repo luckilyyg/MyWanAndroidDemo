@@ -156,7 +156,7 @@ public class DemoDetailListFragment extends BaseFragment implements DemoDetailLi
                 demoDetailListBeans.addAll(beans.getDatas());
                 adapter.addData(beans.getDatas());
             }else{
-                ToastUtil.show(context,getString(R.string.load_more_no_data));
+                ToastUtil.show(activity,getString(R.string.load_more_no_data));
             }
         }
         showNormal();

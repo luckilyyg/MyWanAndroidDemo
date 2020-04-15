@@ -41,7 +41,7 @@ public class HomeDetailPresenter extends BasePresenter<HomeDetailContract.view> 
     public void collectArticle(int id) {
 
         ApiServer mLoginServer = RxRetrofit.getInstance().create(ApiServer.class);
-        RxHttp.sendRequest(mLoginServer.collectArticle(id), new Consumer<BaseHttpBean>() {
+        RxHttp.sendNoRequest(mLoginServer.collectArticle(id), new Consumer<BaseHttpBean>() {
             @Override
             public void accept(BaseHttpBean baseResp) throws Exception {
                 if(baseResp.getErrorCode() == ConstantUtil.REQUEST_ERROR){
@@ -67,7 +67,7 @@ public class HomeDetailPresenter extends BasePresenter<HomeDetailContract.view> 
     public void cancelCollectArticle(int id) {
 
         ApiServer mLoginServer = RxRetrofit.getInstance().create(ApiServer.class);
-        RxHttp.sendRequest(mLoginServer.removeCollectArticle(id), new Consumer<BaseHttpBean>() {
+        RxHttp.sendNoRequest(mLoginServer.removeCollectArticle(id), new Consumer<BaseHttpBean>() {
             @Override
             public void accept(BaseHttpBean baseResp) throws Exception {
                 if(baseResp.getErrorCode() == ConstantUtil.REQUEST_ERROR){

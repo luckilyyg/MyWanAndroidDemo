@@ -53,6 +53,8 @@
     <color name="red">#FFf9382a</color>
     <color name="theme">#03A9F4</color>
     <color name="transparent">#00000000</color>
+    <color name="done_todo_date">#E4A340</color>
+    <color name="notdone_todo_date">#2AB27F</color>
     <!--<color name="white_255">#ffffff</color>-->
     <color name="select">#ff595f</color>
     <color name="black_255">#000</color>

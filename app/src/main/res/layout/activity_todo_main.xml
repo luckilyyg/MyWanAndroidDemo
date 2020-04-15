@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".mvp.ui.activity.TodoMainActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="false"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:elevation="0dp">
+
+        <include layout="@layout/common_toolbar" />
+    </android.support.design.widget.AppBarLayout>
+
+
+    <LinearLayout
+        android:id="@+id/normal_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:ignore="UselessParent">
+
+        <com.flyco.tablayout.SlidingTabLayout
+            android:id="@+id/todo_tab_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            app:tl_divider_color="@color/theme"
+            app:tl_divider_padding="13dp"
+            app:tl_indicator_color="@color/theme"
+            app:tl_indicator_corner_radius="@dimen/dp_4"
+            app:tl_indicator_height="2dp"
+            app:tl_textAllCaps="false"
+            app:tl_textBold="BOTH"
+            android:layout_gravity="center"
+            app:tl_textSelectColor="@color/theme"
+            app:tl_textUnselectColor="@color/black_50"
+            app:tl_textsize="@dimen/sp_14"
+            app:tl_underline_height="0dp" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/wx_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/float_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="70dp"
+        app:borderWidth="0dp"
+        app:layout_behavior="@string/float_button"
+        app:rippleColor="@color/theme"
+        app:srcCompat="@drawable/icon_up_arrow" />
+
+
+</android.support.design.widget.CoordinatorLayout>

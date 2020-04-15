@@ -99,4 +99,19 @@ public class TodoDesBean implements Serializable {
         this.userId = userId;
     }
 
+    @Override
+    public String toString() {
+        return "TodoDesBean{" +
+                "completeDate=" + completeDate +
+                ", completeDateStr='" + completeDateStr + '\'' +
+                ", content='" + content + '\'' +
+                ", date=" + date +
+                ", dateStr='" + dateStr + '\'' +
+                ", id=" + id +
+                ", status=" + status +
+                ", title='" + title + '\'' +
+                ", type=" + type +
+                ", userId=" + userId +
+                '}';
+    }
 }

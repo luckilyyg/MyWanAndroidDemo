@@ -182,6 +182,11 @@ public interface ApiServer {
     @POST("/lg/todo/add/json")
     Flowable<BaseHttpBean> addToDo(@Query("title") String title, @Query("content") String content, @Query("date") String date, @Query("type") String type);
 
+
+    @POST("/lg/todo/add/json")
+    Flowable<BaseHttpBean<TodoDesBean>> addToDoNew(@Query("title") String title, @Query("content") String content, @Query("date") String date, @Query("type") String type);
+
+
     /**
      * 更新状态Todo
      * http://www.wanandroid.com/lg/todo/done/80/json
@@ -192,6 +197,8 @@ public interface ApiServer {
      */
     @POST("/lg/todo/done/{id}/json")
     Flowable<BaseHttpBean<TodoDesBean>> updateDoneToDo(@Path("id") int id, @Query("status") int status);
+
+
 
     /**
      * 删除Todo

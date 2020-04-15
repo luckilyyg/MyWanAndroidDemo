@@ -257,7 +257,7 @@ public class ApiServerImp {
      */
     public void AddTodoImp(String title, String content, String date, String type, final OnResultClick<BaseHttpBean> result) {
         ApiServer mLoginServer = RxRetrofit.getInstance().create(ApiServer.class);
-        RxHttp.sendRequest(mLoginServer.addToDo(title, content, date, type), new Consumer<BaseHttpBean>() {
+        RxHttp.sendNoRequest(mLoginServer.addToDo(title, content, date, type), new Consumer<BaseHttpBean>() {
             @Override
             public void accept(BaseHttpBean baseHttpBean) throws Exception {
                 result.success(baseHttpBean);
@@ -303,7 +303,7 @@ public class ApiServerImp {
      */
     public void DeleteTodo(int id, final OnResultClick<BaseHttpBean> result) {
         ApiServer mLoginServer = RxRetrofit.getInstance().create(ApiServer.class);
-        RxHttp.sendRequest(mLoginServer.deleteToDo(id), new Consumer<BaseHttpBean>() {
+        RxHttp.sendNoRequest(mLoginServer.deleteToDo(id), new Consumer<BaseHttpBean>() {
             @Override
             public void accept(BaseHttpBean baseHttpBean) throws Exception {
                 result.success(baseHttpBean);
@@ -326,7 +326,7 @@ public class ApiServerImp {
      */
     public void CollectArticle(int id, final OnResultClick<BaseHttpBean> result) {
         ApiServer mLoginServer = RxRetrofit.getInstance().create(ApiServer.class);
-        RxHttp.sendRequest(mLoginServer.collectArticle(id), new Consumer<BaseHttpBean>() {
+        RxHttp.sendNoRequest(mLoginServer.collectArticle(id), new Consumer<BaseHttpBean>() {
             @Override
             public void accept(BaseHttpBean baseHttpBean) throws Exception {
                 result.success(baseHttpBean);
@@ -349,7 +349,7 @@ public class ApiServerImp {
      */
     public void RemoveCollectArticle(int id, int originId, final OnResultClick<BaseHttpBean> result) {
         ApiServer mLoginServer = RxRetrofit.getInstance().create(ApiServer.class);
-        RxHttp.sendRequest(mLoginServer.removeCollectArticle(id), new Consumer<BaseHttpBean>() {
+        RxHttp.sendNoRequest(mLoginServer.removeCollectArticle(id), new Consumer<BaseHttpBean>() {
             @Override
             public void accept(BaseHttpBean baseHttpBean) throws Exception {
                 result.success(baseHttpBean);
@@ -391,7 +391,7 @@ public class ApiServerImp {
      */
     public void Logout(final OnResultClick<BaseHttpBean> result) {
         ApiServer mLoginServer = RxRetrofit.getInstance().create(ApiServer.class);
-        RxHttp.sendRequest(mLoginServer.logout(), new Consumer<BaseHttpBean>() {
+        RxHttp.sendNoRequest(mLoginServer.logout(), new Consumer<BaseHttpBean>() {
             @Override
             public void accept(BaseHttpBean baseHttpBean) throws Exception {
                 result.success(baseHttpBean);

@@ -113,7 +113,7 @@ public class SystemDetailListFragment extends BaseFragment implements SystemDeta
                 datasBeanList.addAll(systemDetailListBean.getDatas());
                 adapter.addData(systemDetailListBean.getDatas());
             } else {
-                ToastUtil.show(context, getString(R.string.load_more_no_data));
+                ToastUtil.show(activity, getString(R.string.load_more_no_data));
             }
         }
     }

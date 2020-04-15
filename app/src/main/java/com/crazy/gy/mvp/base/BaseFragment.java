@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.crazy.gy.App;
 import com.crazy.gy.R;
+import com.crazy.gy.entity.TodoDesBean;
 import com.crazy.gy.mvp.base.contract.BaseView;
 import com.crazy.gy.mvp.util.network.NetUtil;
 import com.crazy.gy.mvp.util.network.NetWorkBroadcastReceiver;
@@ -31,7 +33,6 @@ import butterknife.ButterKnife;
 
 public abstract class BaseFragment extends Fragment implements BaseView, NetWorkBroadcastReceiver.NetEvent{
     protected Activity activity;
-    protected App context;
     public static NetWorkBroadcastReceiver.NetEvent eventFragment;
     private int netMobile;
     public static String TAG;
@@ -58,6 +59,7 @@ public abstract class BaseFragment extends Fragment implements BaseView, NetWork
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+//        Log.e(TAG, "onCreateView: " );
         return inflater.inflate(getLayoutResID(), container,false);
     }
 
@@ -65,8 +67,8 @@ public abstract class BaseFragment extends Fragment implements BaseView, NetWork
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+//        Log.e(TAG, "onViewCreated: " );
         activity = getActivity();
-        context = App.getInstance();
         TAG = getClass().getSimpleName();//获取Activity名称
         ButterKnife.bind(this, view);
         initUI();
@@ -84,9 +86,40 @@ public abstract class BaseFragment extends Fragment implements BaseView, NetWork
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+//        Log.e(TAG, "onStart: " );
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+//        Log.e(TAG, "onResume: " );
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+//        Log.e(TAG, "onPause: " );
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+//        Log.e(TAG, "onStop: " );
+    }
+
+    @Override
     public void onDestroy() {
         ButterKnife.unbind(this);
         super.onDestroy();
+//        Log.e(TAG, "onDestroy: " );
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+//        Log.e(TAG, "onDestroyView: " );
     }
 
     /**
@@ -220,4 +253,5 @@ public abstract class BaseFragment extends Fragment implements BaseView, NetWork
                 break;
         }
     }
+
 }

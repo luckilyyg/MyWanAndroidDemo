@@ -16,6 +16,12 @@ public class TodoSection extends SectionEntity<TodoDesBean> {
         super(todoBean);
     }
 
-
-
+    @Override
+    public String toString() {
+        return "TodoSection{" +
+                "isHeader=" + isHeader +
+                ", t=" + t +
+                ", header='" + header + '\'' +
+                '}';
+    }
 }

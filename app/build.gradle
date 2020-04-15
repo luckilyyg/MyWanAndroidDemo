@@ -46,7 +46,7 @@ dependencies {
     implementation 'com.contrarywind:Android-PickerView:4.1.6'
     implementation 'com.github.bumptech.glide:glide:3.7.0'
     implementation 'com.youth.banner:banner:1.4.10'
-    //垂直的tablayout
+    //垂直的tablayout 在导航fragment中实现
     implementation 'q.rorbin:VerticalTabLayout:1.2.5'
     implementation 'com.hyman:flowlayout-lib:1.1.2'
     implementation 'com.just.agentweb:agentweb:4.0.2'

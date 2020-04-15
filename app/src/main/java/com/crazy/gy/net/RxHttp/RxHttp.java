@@ -19,11 +19,21 @@ import io.reactivex.schedulers.Schedulers;
 public class RxHttp {
     /**
      * 基本封装（io线程-----APP程序主线程）
+     * @param <T>
      * @param flowables
      * @param response
-     * @param <T>
      */
-    public static <T> void sendRequest(Flowable<T> flowables, Consumer<T> response,Consumer<Throwable> fail){
+    public  static void sendNoRequest(Flowable<BaseHttpBean> flowables, Consumer<BaseHttpBean> response, Consumer<Throwable> fail){
+        flowables.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(response,fail);
+    }
+    /**
+     * 基本封装（io线程-----APP程序主线程）
+     * @param flowables
+     * @param response
+     */
+    public  static <T> void sendRequest(Flowable<BaseHttpBean<T>> flowables, Consumer<BaseHttpBean<T>> response, Consumer<Throwable> fail){
         flowables.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response,fail);
