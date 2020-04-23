@@ -16,6 +16,7 @@ import com.crazy.gy.R;
 import com.crazy.gy.mvp.base.BaseFragment;
 import com.crazy.gy.mvp.ui.activity.AboutMeActivity;
 import com.crazy.gy.mvp.ui.activity.CollectionListActivity;
+import com.crazy.gy.mvp.ui.activity.NavgationActivity;
 import com.crazy.gy.mvp.ui.activity.TodoMainActivity;
 import com.crazy.gy.mvp.util.ConstantUtil;
 import com.crazy.gy.mvp.util.JumpUtil;
@@ -54,6 +55,8 @@ public class mMineFragment extends BaseFragment {
     TextView tvLogout;
     @Bind(R.id.normal_view)
     LinearLayout normalView;
+    @Bind(R.id.view_navgation)
+    RelativeLayout viewNavgation;
     private boolean haslogin;
     private String userName;
 
@@ -85,7 +88,7 @@ public class mMineFragment extends BaseFragment {
         imageHead.setEnabled(!haslogin);
     }
 
-    @OnClick({R.id.view_collect, R.id.view_todo, R.id.view_about, R.id.image_head, R.id.tv_logout})
+    @OnClick({R.id.view_collect, R.id.view_todo, R.id.view_about, R.id.image_head, R.id.tv_logout, R.id.view_navgation})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.view_collect:
@@ -105,9 +108,25 @@ public class mMineFragment extends BaseFragment {
                 Sharedpreferences_Utils.getInstance(activity).clear();
                 initData();
                 break;
+            case R.id.view_navgation:
+                JumpUtil.overlay(activity, NavgationActivity.class);
+                break;
             default:
                 break;
         }
     }
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        ButterKnife.bind(this, rootView);
+        return rootView;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
+    }
 }

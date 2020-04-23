@@ -101,8 +101,6 @@ public class LoginActivity extends AppCompatActivity {
             public void success(BaseHttpBean baseHttpBean) {
                 if (baseHttpBean != null) {
                     if (baseHttpBean.getErrorCode() == 0) {
-                        int userId = ((UserBean) baseHttpBean.getData()).getId();
-                        String niName = ((UserBean) baseHttpBean.getData()).getUsername();
                         Sharedpreferences_Utils.getInstance().setInt("userId", ((UserBean) baseHttpBean.getData()).getId());
                         Sharedpreferences_Utils.getInstance().setString("niName", ((UserBean) baseHttpBean.getData()).getUsername());
                         Sharedpreferences_Utils.getInstance().setString("userPassword", ((UserBean) baseHttpBean.getData()).getPassword());

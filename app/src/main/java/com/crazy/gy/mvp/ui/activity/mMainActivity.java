@@ -21,7 +21,8 @@ import com.crazy.gy.mvp.base.mBaseActivity;
 import com.crazy.gy.mvp.ui.fragment.DemoFragment;
 import com.crazy.gy.mvp.ui.fragment.SystemFragment;
 import com.crazy.gy.mvp.ui.fragment.WxFragment;
-import com.crazy.gy.mvp.ui.fragment.mHomeFragment;
+//import com.crazy.gy.mvp.ui.fragment.mHomeFragment;
+import com.crazy.gy.mvp.ui.fragment.mHomeToFragment;
 import com.crazy.gy.mvp.ui.fragment.mMineFragment;
 import com.crazy.gy.mvp.util.BottomNavigationViewHelper;
 import com.crazy.gy.mvp.util.JumpUtil;
@@ -144,7 +145,7 @@ public class mMainActivity extends mBaseActivity {
     private void scrollToTop() {
         switch (lastIndex) {
             case 0:
-                mHomeFragment homeFragment = (mHomeFragment) fragmentList.get(0);
+                mHomeToFragment homeFragment = (mHomeToFragment) fragmentList.get(0);
                 homeFragment.scrollToTop();
                 break;
             case 1:
@@ -169,7 +170,7 @@ public class mMainActivity extends mBaseActivity {
      */
     private void initFragment() {
         fragmentList = new ArrayList<>();
-        fragmentList.add(mHomeFragment.getInstance());
+        fragmentList.add(mHomeToFragment.getInstance());
         fragmentList.add(SystemFragment.getInstance());
         fragmentList.add(WxFragment.getInstance());
         fragmentList.add(DemoFragment.getInstance());

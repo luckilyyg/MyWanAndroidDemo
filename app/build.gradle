@@ -57,4 +57,5 @@ dependencies {
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-14'
     implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-14'//没有使用特殊Header，可以不加这行
     implementation 'de.hdodenhof:circleimageview:2.2.0'
+    implementation "org.reactivestreams:reactive-streams:1.0.2"
 }

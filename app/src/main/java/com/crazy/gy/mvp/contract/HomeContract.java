@@ -12,11 +12,6 @@ import java.util.List;
 /**
  * 首页 契约类
  *
- * @packageName: cn.white.ymc.wanandroidmaster.ui.home
- * @fileName: HomeContract
- * @date: 2018/8/3  17:36
- * @author: ymc
- * @QQ:745612618
  */
 
 public class HomeContract {

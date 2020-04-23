@@ -12,6 +12,8 @@ import com.crazy.gy.mvp.base.contract.BaseView;
  */
 public class AddTodoContract {
 
+    
+
     public interface View extends BaseView {
         void addTodoOk(TodoDesBean todoDesBean);
 
